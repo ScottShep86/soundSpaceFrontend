@@ -1,4 +1,5 @@
 /* import React from 'react' */
+import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 
 function Review() {
@@ -12,6 +13,7 @@ function Review() {
         <label>Comment: <textarea/></label>
         <button type='submit'>Submit Review</button>
     </form>
+    <Footer />
     </div>
   )
 }

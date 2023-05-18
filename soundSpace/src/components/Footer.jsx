@@ -2,7 +2,7 @@
 
 function Footer() {
   return (
-    <div>Footer</div>
+    <div>©2023 - soundSpace - Olivier Dewulf - Rui Melo - Scott Shepherd</div>
   )
 }
 

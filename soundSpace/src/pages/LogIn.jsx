@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Navbar from "../components/Navbar"
+import Footer from '../components/Footer'
 
 function LogIn() {
   return (
@@ -14,6 +15,7 @@ function LogIn() {
     <p>Not a User?</p>
     <Link to={'/signup-producer'}>Sign Up as a Producer</Link>
     <Link to={'/signup-record-label'}>Sign Up with your Record Label</Link>
+    <Footer />
     </div>
   )
 }

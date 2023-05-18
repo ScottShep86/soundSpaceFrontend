@@ -1,4 +1,5 @@
 /* import React from 'react' */
+import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 
 function EditProfileP() {
@@ -29,6 +30,7 @@ function EditProfileP() {
         <label>Associated Acts: <input/></label>
         <button>SignUp</button>
     </form>
+    <Footer />
     </div>
   )
 }

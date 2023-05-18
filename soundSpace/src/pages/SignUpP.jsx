@@ -1,6 +1,7 @@
 /* import React from 'react' */
 import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar"
+import Footer from "../components/Footer"
 
 function SignUpP() {
   return (
@@ -20,6 +21,7 @@ function SignUpP() {
     </form>
     <p>Not a producer?</p>
     <Link to={'/signup-record-label'}>Sign Up with your Record Label</Link>
+    <Footer />
     </div>
 
   )
