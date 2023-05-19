@@ -33,14 +33,12 @@ function Profile() {
         {isLoading ? 
           (<CircularProgress />) : 
           (<div>
-            <h3>{userRecordLabel.name}</h3>
+            <h3>{userRecordLabel.companyName}</h3>
             <p>{userRecordLabel.email}</p>
-            <img src={userRecordLabel.picture} alt='profile picture'/>
+            <img src={userRecordLabel.logo} alt='profile logo'/>
             <p>{userRecordLabel.location}</p>
             <p>{userRecordLabel.associatedActs}</p>
-            <p>{userRecordLabel.aboutMe}</p>
-            <p>{userRecordLabel.favoriteProducers}</p>
-            <p>{userRecordLabel.genre}</p>
+            <p>{userRecordLabel.aboutUe}</p>
           </div>)
         } 
       <Footer />
