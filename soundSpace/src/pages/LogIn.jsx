@@ -1,10 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { SessionContext } from '../contexts/SessionContext'
 import Navbar from "../components/Navbar"
 import Footer from '../components/Footer'
 
 function LogIn() {
   const navigate = useNavigate();
+
+  const { setToken } = useContext(SessionContext)
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
