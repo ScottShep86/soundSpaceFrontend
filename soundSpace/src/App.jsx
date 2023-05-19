@@ -14,8 +14,8 @@ function App() {
     <Routes>
       <Route path='/' element={<HomePage />}/>
       <Route path='/login' element={<LogIn />}/>
-      <Route path='/signup-producer' element={<SignUpP />}/>
-      <Route path='/signup-record-label' element={<SignUpRL />}/>
+      <Route path='/signup/producer' element={<SignUpP />}/>
+      <Route path='/signup/record-label' element={<SignUpRL />}/>
       <Route path='/profile/:id' element={<Profile />}/>
       <Route path='/profile/:id/edit' element={<EditProfile />}/>
       <Route path='/profile/review' element={<Review />}/>
