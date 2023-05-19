@@ -30,9 +30,11 @@ function AllRecordLabels() {
       <Navbar />
         AllRecordLabels this can be deleted later
         {isLoading ?
-          <CircularProgress /> : recordLabels.map(oneRecordLabel => (
+          <CircularProgress /> : 
+          recordLabels.map(oneRecordLabel => (
           <h3><Link to={'EXAMPLE'}>{oneRecordLabel.companyName}</Link></h3>
-          ))}
+          ))
+        }
       <Footer />
     </div>
   )
