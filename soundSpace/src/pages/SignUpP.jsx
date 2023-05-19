@@ -20,7 +20,7 @@ function SignUpP() {
         <button>SignUp</button>
     </form>
     <p>Not a producer?</p>
-    <Link to={'/signup-record-label'}>Sign Up with your Record Label</Link>
+    <Link to={'/signup/record-label'}>Sign Up with your Record Label</Link>
     <Footer />
     </div>
 

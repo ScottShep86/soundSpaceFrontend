@@ -20,7 +20,7 @@ function SignUpRL() {
         <button>SignUp</button>
     </form>
     <p>Not a record label?</p>
-    <Link to={'/signup-producer'}>Sign Up as a Producer</Link>
+    <Link to={'/signup/producer'}>Sign Up as a Producer</Link>
     <Footer />
     </div>
   )
