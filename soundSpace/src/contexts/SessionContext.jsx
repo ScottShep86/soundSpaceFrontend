@@ -1,10 +1,8 @@
-/* import { useLocalStorage } from '@mantine/hooks' */
 import { createContext, useEffect, useState } from 'react'
 
 export const SessionContext = createContext()
 
-const SessionContextProvider = ({ children }) => {
-  // const [token, setToken] = useLocalStorage({ key: 'authToken' })
+const SessionContextProvider = (children) => {
   const [token, setToken] = useState()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
