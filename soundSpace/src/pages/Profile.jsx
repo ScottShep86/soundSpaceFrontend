@@ -9,23 +9,43 @@ import { SessionContext } from "../contexts/SessionContext"
 
 function Profile() {
 
-  const { id } = useParams()
-  const [userProducer, setUserProducer] = useState([]) 
-  const [isLoading, setIsLoading] = useState(true)
-
-  const {logout} = useContext(SessionContext)
-
-  const getProfile = async () => {
-    try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/profile/${id}`) 
-      setUserProducer(response.data)
-      setIsLoading(false)
-    } catch (error) {
-      console.log(error)
+  const verifyToken = async currentToken => {
+    const response = await fetch(`${import.meta.env.VITE_BASE_API_URL}/auth/verify`, {
+      headers: {
+        Authorization: `Bearer ${currentToken}`,
+      },
+    })
+    console.log('verifytoken response',response)
+    if (response.status === 200) {
+      const parsed = await response.json()
+      console.log("2nd parsed:",parsed)
+      return parsed
     }
   }
 
+
+  const [userProducer, setUserProducer] = useState([]) 
+  const [isLoading, setIsLoading] = useState(true)
+  console.log("userProducer:",userProducer)
+
+  const {logout, token} = useContext(SessionContext)
+
+  
+
   useEffect(() => {
+
+  const getProfile = async () => {
+      try {
+        const localToken = localStorage.getItem('authToken')
+        const something = await verifyToken(localToken)
+        console.log("ss",something)
+        const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/profile/${something.producer._id}`) 
+        setUserProducer(response.data)
+        setIsLoading(false)
+      } catch (error) {
+        console.log(error)
+      }
+    }
     getProfile()
   }, [])
 

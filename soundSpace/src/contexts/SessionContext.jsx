@@ -35,7 +35,7 @@ const SessionContextProvider = (props) => {
     if (token) {
       localStorage.setItem('authToken', token)
       setIsLoading(false)
-      console.log('second useEffect')
+      console.log('second')
     } else {
       localStorage.removeItem('authToken')
     }
@@ -48,7 +48,7 @@ const SessionContextProvider = (props) => {
   }
 
   return (
-    <SessionContext.Provider value={{ token, setToken, isLoggedIn, isLoading, logout }}>
+    <SessionContext.Provider value={{ token, setToken, isLoggedIn, isLoading, logout, verifyToken }}>
       {props.children}
     </SessionContext.Provider>
   )
