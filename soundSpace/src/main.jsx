@@ -8,8 +8,8 @@ import SessionContextProvider from "./contexts/SessionContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-    <SessionContextProvider>
-      <App />
+      <SessionContextProvider>
+        <App />
       </SessionContextProvider>
     </BrowserRouter>
   </React.StrictMode>

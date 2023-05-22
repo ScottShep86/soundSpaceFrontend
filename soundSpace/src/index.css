@@ -73,3 +73,12 @@ h1 {
   font-family: 'Rajdhani', sans-serif;
 }
 
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card img {
+  height: 100px;
+}

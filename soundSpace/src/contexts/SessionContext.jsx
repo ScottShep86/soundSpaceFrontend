@@ -2,24 +2,26 @@ import { createContext, useEffect, useState } from 'react'
 
 export const SessionContext = createContext()
 
-const SessionContextProvider = (children) => {
+const SessionContextProvider = (props) => {
   const [token, setToken] = useState()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
   const verifyToken = async currentToken => {
-    const response = await fetch('http://localhost:5005/auth/verify', {
+    const response = await fetch(`${import.meta.env.VITE_BASE_API_URL}/auth/verify`, {
       headers: {
         Authorization: `Bearer ${currentToken}`,
       },
     })
+    console.log(response)
     if (response.status === 200) {
       const parsed = await response.json()
       setToken(currentToken)
       setIsLoggedIn(true)
-      console.log(parsed)
+      console.log("I am parsed", parsed)
     }
     setIsLoading(false)
+    console.log("first")
   }
 
   useEffect(() => {
@@ -33,6 +35,7 @@ const SessionContextProvider = (children) => {
     if (token) {
       localStorage.setItem('authToken', token)
       setIsLoading(false)
+      console.log('second useEffect')
     } else {
       localStorage.removeItem('authToken')
     }
@@ -46,7 +49,7 @@ const SessionContextProvider = (children) => {
 
   return (
     <SessionContext.Provider value={{ token, setToken, isLoggedIn, isLoading, logout }}>
-      {children}
+      {props.children}
     </SessionContext.Provider>
   )
 }

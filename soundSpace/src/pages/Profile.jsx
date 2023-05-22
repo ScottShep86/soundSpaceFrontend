@@ -2,9 +2,10 @@
 import { useParams } from "react-router-dom"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
-import { useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import CircularProgress from '@mui/material/CircularProgress'
+import { SessionContext } from "../contexts/SessionContext"
 
 function Profile() {
 
@@ -12,9 +13,11 @@ function Profile() {
   const [userProducer, setUserProducer] = useState([]) 
   const [isLoading, setIsLoading] = useState(true)
 
+  const {logout} = useContext(SessionContext)
+
   const getProfile = async () => {
     try {
-      const response = await axios.get(`EXAMPLE/${id}`) 
+      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/profile/${id}`) 
       setUserProducer(response.data)
       setIsLoading(false)
     } catch (error) {
@@ -41,6 +44,7 @@ function Profile() {
             <p>{userProducer.aboutMe}</p>
             <p>{userProducer.favoriteProducers}</p>
             <p>{userProducer.genre}</p>
+            <button type='button' onClick={logout}>Log Out</button>
           </div>)
         } 
       <Footer />

@@ -14,7 +14,7 @@ function LogIn() {
 
   const handleSubmit = async event => {
     event.preventDefault()
-    const response = await fetch('http://localhost:5005/auth/login', {
+    const response = await fetch(`${import.meta.env.VITE_BASE_API_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ function LogIn() {
     if (response.status === 200) {
       const tokenFromResponse = await response.json()
       setToken(tokenFromResponse)
-      navigate('/profile')
+      navigate(`/profile`)
     }
   }
   return (
@@ -32,13 +32,12 @@ function LogIn() {
     <Navbar />
     <h1>LogIn</h1>
     <form onSubmit={handleSubmit}>
-        <label>E-Mail Address: <input type='email' required value={email} onChange={event => setEmail(event.target.value)}/></label>
-        <label>Password: <input type='password' required value={password} onChange={event => setPassword(event.target.value)}/></label>
+        <label>E-Mail Address: <input name="email" type='email' required value={email} onChange={event => setEmail(event.target.value)}/></label>
+        <label>Password: <input name="password" type='password' required value={password} onChange={event => setPassword(event.target.value)}/></label>
         <button type='submit'>LogIn</button>
     </form>
     <p>Not a User?</p>
-    <Link to={'/signup-producer'}>Sign Up as a Producer</Link>
-    <Link to={'/signup-record-label'}>Sign Up with your Record Label</Link>
+    <Link to={'/signup'}>Sign Up as a Producer</Link>
     <Footer />
     </div>
   )

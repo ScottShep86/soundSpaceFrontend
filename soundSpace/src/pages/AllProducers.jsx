@@ -3,7 +3,7 @@ import axios from "axios"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+/* import { Link } from "react-router-dom" */
 import CircularProgress from '@mui/material/CircularProgress'
 
 function AllProducers() {
@@ -31,7 +31,7 @@ function AllProducers() {
       AllProducers this can be deleted later
       {isLoading ?
           <CircularProgress /> : producers.map(oneProducer => (
-          <h3><Link to={'EXAMPLE'}>{oneProducer.name}</Link></h3>
+          {/* <h3><Link to={'EXAMPLE'}>{oneProducer.name}</Link></h3> */}
           ))}
       <Footer />
     </div>

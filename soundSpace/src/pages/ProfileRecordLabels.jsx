@@ -2,7 +2,7 @@
 import { useParams } from "react-router-dom"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import CircularProgress from '@mui/material/CircularProgress'
 
