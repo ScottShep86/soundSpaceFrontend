@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
+import Review from "../components/Review";
 
 function Profile() {
   const verifyToken = async (currentToken) => {
@@ -69,6 +70,7 @@ function Profile() {
           </div>
         </div>
       )}
+      <Review />
       <Footer />
     </div>
   );

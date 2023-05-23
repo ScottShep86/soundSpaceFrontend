@@ -2,10 +2,12 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import JobForm from "../components/JobForm";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { SessionContext } from "../contexts/SessionContext";
 
 function JobListings() {
   const [isTabOpen, setIsTabOpen] = useState(false);
+  const { token } = useContext(SessionContext);
 
   const handleButtonClick = () => {
     setIsTabOpen(!isTabOpen);
@@ -29,10 +31,26 @@ function JobListings() {
     fetchJobs()
   }, [])
 
+  /* const handleDelete = async (jobId) => {
+    try {
+        const deleteJob = await fetch(`${import.meta.env.VITE_BASE_API_URL}/api/jobs/${jobId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+        });
+        if(deleteJob.status === 200) {
+            setJobs(jobs.filter(job => job._id !== jobId));
+        } 
+    } catch (error) {
+        console.error(error);
+    }
+  } */
+
   return (
     <div>
       <Navbar />
-      JobListings
       <div>
         <button onClick={handleButtonClick}>Create a New Job</button>
         <div className={`tab-content ${isTabOpen ? "open" : ""}`}>
@@ -42,7 +60,14 @@ function JobListings() {
       <>
       <h2>Job Listings</h2>
       {jobs.map(job => (
-        <h2 key={job._id}>{job.title}</h2> 
+        <div key={job._id}>
+        <h2>{job.title}</h2>
+        <h3>{job.location}</h3>
+        <p>{job.jobType}</p>
+        <p>{job.description}</p>
+        <button>edit</button>
+        {/* <button onClick={handleDelete}>delete</button> */}
+        </div>
       ))}
     </>
       
