@@ -37,6 +37,7 @@ const SessionContextProvider = (props) => {
     if (token) {
       localStorage.setItem('authToken', token)
       setIsLoading(false)
+      setIsLoggedIn(true)
       console.log('second')
     } else {
       localStorage.removeItem('authToken')

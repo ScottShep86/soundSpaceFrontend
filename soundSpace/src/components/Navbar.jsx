@@ -14,6 +14,7 @@ function Navbar() {
       <div className="navbarRight">
       {isLoggedIn ? (
         <>
+        <Link to="/jobs" className='link'>Job Listing</Link>
           <Link to="/profile" className='link'>My Profile</Link>
           <Link to="/" className='link' onClick={logout}>Log Out</Link>
         </>

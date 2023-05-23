@@ -1,10 +1,9 @@
 /* import React from 'react' */
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
-import { SessionContext } from "../contexts/SessionContext";
 
 function Profile() {
   const verifyToken = async (currentToken) => {
@@ -24,8 +23,6 @@ function Profile() {
 
   const [userProducer, setUserProducer] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const { logout } = useContext(SessionContext);
 
   useEffect(() => {
     const getProfile = async () => {
@@ -61,6 +58,7 @@ function Profile() {
         <CircularProgress />
       ) : (
         <div>
+        <div>
           <h3>{userProducer.name}</h3>
           <img src={userProducer.picture} alt="profile picture" />
           <p>City: {userProducer.location}</p>
@@ -68,9 +66,7 @@ function Profile() {
           <p>Bio: {userProducer.aboutMe}</p>
           <p>{userProducer.favoriteProducers}</p>
           <p>Genre: {userProducer.genre}</p>
-          <button type="button" onClick={logout}>
-            Log Out
-          </button>
+          </div>
         </div>
       )}
       <Footer />

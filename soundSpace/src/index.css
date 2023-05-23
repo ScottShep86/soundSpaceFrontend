@@ -282,6 +282,20 @@ label {
   clear: both;
 }
 
+.tab-content {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.tab-content.open {
+  height: 300px;
+  position: absolute;
+  background-color:rgb(225, 225, 221);
+  border: solid 1px black;
+  padding: 6px;
+}
+
 @media screen and (max-width: 600px) {
   .col-25, .col-75, input[type=submit] {
     width: 100%;
