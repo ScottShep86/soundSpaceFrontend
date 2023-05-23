@@ -15,7 +15,7 @@ function AllRecordLabels() {
     //here is for the whole page
         <div> 
         <Navbar />
-            <h1>All Record Labels</h1>
+            <h2>All Record Labels</h2>
            {/*  here will contain all containers */}
             <div className="container"> 
             {/* //here is for every card */}

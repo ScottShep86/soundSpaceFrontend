@@ -1,40 +1,58 @@
 /* import React from 'react' */
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer"
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 function SignUpP() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [picture, setPicture] = useState('')
-  const [location, setLocation] = useState('');
-  const [aboutMe, setAboutMe] = useState('')
-  const [associatedActs, setAssociatedActs] = useState('');
-  const [genre, setGenre] = useState('')
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [picture, setPicture] = useState("");
+  const [location, setLocation] = useState("");
+  const [aboutMe, setAboutMe] = useState("");
+  const [associatedActs, setAssociatedActs] = useState("");
+  const [genre, setGenre] = useState("");
 
-  const navigate = useNavigate()
- 
-  const handleSubmit = async event => {
-    event.preventDefault()
-    const response = await fetch(`${import.meta.env.VITE_BASE_API_URL}/auth/signup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({name, email, password, picture, location, aboutMe, associatedActs, genre}),
-    })
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const response = await fetch(
+      `${import.meta.env.VITE_BASE_API_URL}/auth/signup`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          picture,
+          location,
+          aboutMe,
+          associatedActs,
+          genre,
+        }),
+      }
+    );
     if (response.status === 201) {
-      navigate('/login')
+      navigate("/login");
+    } else {
+      const errorResponse = await response.json();
+      setErrorMessage(errorResponse.message);
     }
-  }
- 
+  };
+
   return (
-    <div>
-    <Navbar />
-    SignUp Producer
-    <form onSubmit={handleSubmit}>
+    <div className="page">
+      <Navbar />
+      <h2>SignUp</h2>
+
+      <form onSubmit={handleSubmit}>
         <label>Name: <input type="name" required value={name} onChange={event => setName(event.target.value)}/></label>
         <label>E-Mail: <input type="email" required value={email} onChange={event => setEmail(event.target.value)}/></label>
         <label>Password: <input type="password" required value={password} onChange={event => setPassword(event.target.value)}/></label>
@@ -56,12 +74,14 @@ function SignUpP() {
         <option>Metal</option>
         </select>
         </label>
-        <button type="submit">SignUp</button>
-    </form>
-    <Footer />
+        {errorMessage && <p className='errorMessage'>{errorMessage}</p>}
+        <button className='formBtn' type="submit">SignUp</button>
+        <p>Already a User?</p>
+        <Link to={"/login"}>LogIn to your account</Link>
+      </form>
+      <Footer />
     </div>
-
-  )
+  );
 }
 
-export default SignUpP
+export default SignUpP;

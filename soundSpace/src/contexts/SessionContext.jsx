@@ -1,8 +1,10 @@
 import { createContext, useEffect, useState } from 'react'
+/* import { useNavigate } from 'react-router-dom' */
 
 export const SessionContext = createContext()
 
 const SessionContextProvider = (props) => {
+  /* const navigate = useNavigate() */
   const [token, setToken] = useState()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
