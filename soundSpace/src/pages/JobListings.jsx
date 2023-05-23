@@ -39,13 +39,12 @@ function JobListings() {
           <JobForm />
         </div>
       </div>
-      <div>
-      {jobs.map((job) => {
-        return(
-        <h2 key={job._id}>{job.title}</h2>
-        )
-    })}
-    </div>
+      <>
+      <h2>Job Listings</h2>
+      {jobs.map(job => (
+        <h2 key={job._id}>{job.title}</h2> 
+      ))}
+    </>
       
       <Footer />
     </div>

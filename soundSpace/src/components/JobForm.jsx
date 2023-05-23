@@ -1,5 +1,6 @@
-import { useState} from "react";
+import { useContext, useState} from "react";
 import { useNavigate } from "react-router-dom";
+import { SessionContext } from "../contexts/SessionContext";
 
 function JobForm() {
   const [title, setTitle] = useState("");
@@ -12,7 +13,7 @@ function JobForm() {
 
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("token");
+  const { token } = useContext(SessionContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,7 +27,6 @@ function JobForm() {
         },
         body: JSON.stringify({
           title,
-          createdBy: token,
           location,
           jobType,
           description,
