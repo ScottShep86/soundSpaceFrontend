@@ -1,8 +1,9 @@
 /* import React from 'react' */
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 /* import CircularProgress from "@mui/material/CircularProgress";
 import { SessionContext } from "../contexts/SessionContext"; */
 
@@ -26,6 +27,7 @@ function Profile() {
   };
 
   const [userProducer, setUserProducer] = useState([]);
+  const [userJobs, setUserJobs] = useState([]);
 
   useEffect(() => {
     const getProfile = async () => {
@@ -33,10 +35,10 @@ function Profile() {
         const localToken = localStorage.getItem("authToken");
         if (!localToken) return;
 
-        const something = await verifyToken(localToken);
+        const user = await verifyToken(localToken);
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_API_URL}/profile/${
-            something.producer._id
+            user.producer._id
           }`,
           {
             headers: {
@@ -49,14 +51,34 @@ function Profile() {
         console.log(error);
       }
     };
+
+    const getMyJobs = async () => {
+      try {
+        const localToken = localStorage.getItem("authToken");
+        if(!localToken) return;
+        const user = await verifyToken(localToken);
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_API_URL}/profile/${user.producer._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localToken}`,
+            },
+          }
+        );
+        setUserJobs(response.data)
+        console.log(userJobs)
+      } catch (error) {
+        console.error(error)
+      }
+    }
     getProfile();
+    getMyJobs();
   }, []);
 
   return (
     <div>
       <Navbar />
       Profile this can be deleted later
-        <div>
         <div>
           <h3>{userProducer.name}</h3>
           <img src={userProducer.picture} alt="profile picture" />
@@ -65,8 +87,14 @@ function Profile() {
           <p>Bio: {userProducer.aboutMe}</p>
           <p>{userProducer.favoriteProducers}</p>
           <p>Genre: {userProducer.genre}</p>
-          </div>
-        </div>
+  </div>
+        <Link to="/jobs/create">Create a Job</Link>
+
+      <div>
+        <h3>My posted Jobs</h3>
+
+      </div>
+
       <Footer />
     </div>
   );

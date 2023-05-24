@@ -1,17 +1,13 @@
 /* import React from 'react' */
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import JobForm from "../components/JobForm";
-import { useState, useEffect, useContext } from "react";
-import { SessionContext } from "../contexts/SessionContext";
+import { useState, useEffect } from "react";
+/* import { SessionContext } from "../contexts/SessionContext"; */
 
 function JobListings() {
-  const [isTabOpen, setIsTabOpen] = useState(false);
   /* const { token } = useContext(SessionContext); */
 
-  const handleButtonClick = () => {
-    setIsTabOpen(!isTabOpen);
-  };
+ 
 
   const [jobs, setJobs] = useState([])
 
@@ -51,25 +47,22 @@ function JobListings() {
   return (
     <div>
       <Navbar />
-      <div>
-        <button onClick={handleButtonClick}>Create a New Job</button>
-        <div className={`tab-content ${isTabOpen ? "open" : ""}`}>
-          <JobForm />
-        </div>
-      </div>
       <>
       <h2>Job Listings</h2>
+      <div className="allJobs">
       {jobs.map(job => (
         <div key={job._id}>
-        <h2>{job.title}</h2>
+        <h3>{job.title}</h3>
         <h3>{job.location}</h3>
         <p>{job.createdBy}</p>
         <p>{job.jobType}</p>
         <p>{job.description}</p>
-        <button>edit</button>
-        {/* <button onClick={handleDelete}>delete</button> */}
+        <p>{job.contactNumber}</p>
+        <br></br>
         </div>
+        
       ))}
+      </div>
     </>
       
       <Footer />

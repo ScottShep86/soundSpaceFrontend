@@ -9,6 +9,7 @@ import AllRecordLabels from './pages/AllRecordLabels';
 import AllMusicians from './pages/AllMusicians';
 import StageCrew from './pages/StageCrew'
 import JobListings from './pages/JobListings';
+import CreateJob from './pages/CreateJob';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path='/record-labels' element={<AllRecordLabels />}/>
       <Route path='/musicians' element={<AllMusicians />}/>
       <Route path='/stage-crew' element={<StageCrew />}/>
+      <Route path='/jobs/create' element={<CreateJob/>} />
       <Route path='/jobs' element={<JobListings />}/>
     </Routes>
   )
