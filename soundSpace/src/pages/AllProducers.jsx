@@ -8,7 +8,6 @@ import CircularProgress from '@mui/material/CircularProgress'
 function AllProducers() {
 
   const [producers, setProducers] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
 
  /*  const getAllProducers = async () => {
     try {
@@ -26,7 +25,7 @@ function AllProducers() {
         if(allProducers.status === 200) {
             const parsed = await allProducers.json()
             setProducers(parsed)
-            setIsLoading(false)
+            
         }
     } catch (error) {
         console.error(error)
@@ -42,8 +41,7 @@ function AllProducers() {
     <div>
       <Navbar />
       AllProducers this can be deleted later
-      {isLoading ?
-          <CircularProgress /> : producers.map(producer => (
+      {producers.map(producer => (
           <div key={producer._id}>
           <img src={producer.picture} alt="profile picture"/>
           <h3>{producer.name}</h3>
