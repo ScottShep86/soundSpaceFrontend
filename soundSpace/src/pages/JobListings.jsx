@@ -63,6 +63,7 @@ function JobListings() {
         <div key={job._id}>
         <h2>{job.title}</h2>
         <h3>{job.location}</h3>
+        <p>{job.createdBy}</p>
         <p>{job.jobType}</p>
         <p>{job.description}</p>
         <button>edit</button>

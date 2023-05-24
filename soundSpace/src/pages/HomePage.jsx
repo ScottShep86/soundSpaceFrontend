@@ -5,17 +5,27 @@ import ProducersPage from '../assets/images/andreas-forsberg-rMdOHpO3h5E-unsplas
 import RecordLabels from '../assets/images/blocks-T3mKJXfdims-unsplash.jpg'
 import Band from '../assets/images/rocco-dipoppa-_uDj_lyPVpA-unsplash.jpg'
 import Stage from '../assets/images/magnus-lunay-LHR6tUw8N34-unsplash.jpg'
+import { SessionContext } from '../contexts/SessionContext'
+import { useContext } from 'react'
 
 function HomePage() {
+
+  const { isLoggedIn } = useContext(SessionContext)
+
   return (
     <div>
     <h1>soundSpace</h1>
     <img className='background' src={HomepageImg} alt='soundSpace Image'/>
-    
-    <div className='btnLinks'>
+    {isLoggedIn ? ( 
+      <div className='btnLinks'>
+    <Link className='btn' to={'/profile'}>My Profile</Link>
+    </div>
+    ) : (
+      <div className='btnLinks'>
     <Link className='btn' to={'/login'}>LOGIN</Link>
     <Link className='btn' to={'/signup'}>SIGNUP</Link>
     </div>
+    )}
     <div className='aboutUs'>
     <p>soundSpace is an innovative online platform designed to bring together individuals in the music industry, fostering a vibrant community that thrives on collaboration and connection.</p>
     <br></br>
