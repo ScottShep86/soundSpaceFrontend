@@ -11,6 +11,8 @@ import StageCrew from './pages/StageCrew'
 import JobListings from './pages/JobListings';
 import CreateJob from './pages/CreateJob';
 import EditJob from './pages/EditJob';
+import OneJob from './pages/OneJob';
+import IsPrivate from './components/IsPrivate';
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
       <Route path='/jobs/create' element={<CreateJob/>} />
       <Route path='/profile/:id/edit' element={<EditJob/>}/>
       <Route path='/jobs' element={<JobListings />}/>
+      <Route path='/jobs/:jobId' element={<IsPrivate><OneJob /></IsPrivate>}/>
     </Routes>
   )
 }

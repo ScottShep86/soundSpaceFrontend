@@ -120,7 +120,7 @@ const handleDelete = async (jobId) => {
             <div key={job._id}>
               <h3>{job.title}</h3>
               <p>{job.description}</p>
-              <Link to={{pathname: `/profile/${job._id}/edit`, state: {job:job} }}>Edit Job</Link>
+              <Link to={{pathname: `/profile/${job._id}/edit` }}>Edit Job</Link>
               <button onClick={() => handleDelete(job._id)}>Delete Job</button>
             </div>
           );

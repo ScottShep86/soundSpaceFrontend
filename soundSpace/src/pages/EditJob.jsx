@@ -1,8 +1,8 @@
 /* import React from 'react' */
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 
 function EditJob() {
@@ -11,21 +11,48 @@ function EditJob() {
   const [jobType, setJobType] = useState("");
   const [description, setDescription] = useState("");
   const [contactNumber, setContactNumber] = useState("");
-
+  const [jobId, setJobId] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
   const navigate = useNavigate();
-
-  const job = props.location.state.job;
-  
-
   const { token } = useContext(SessionContext);
+  const {id} = useParams()
 
+
+  useEffect(() => {
+    fetchJob()
+  }, [])
+
+  const fetchJob = async () => {
+
+    try {
+      const localToken = localStorage.getItem("authToken");
+      if (!localToken) return;
+
+      const response = await fetch (`${import.meta.env.VITE_BASE_API_URL}/api/jobs/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localToken}`,
+        },
+      })
+      if (response.status === 200){
+        const parsed = await response.json()
+        console.log(parsed)
+        setTitle(parsed.title)
+        setLocation(parsed.location)
+        setJobType(parsed.jobType)
+        setDescription(parsed.description)
+        setContactNumber(parsed.contactNumber)
+        setJobId(parsed._id)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await fetch(
-      `${import.meta.env.VITE_BASE_API_URL}/profile/${job._id}/edit`,
+      `${import.meta.env.VITE_BASE_API_URL}/profile/${jobId}/edit`,
       {
         method: "PUT",
         headers: {
@@ -41,7 +68,7 @@ function EditJob() {
         }),
       }
     );
-    if (response.status === 201) {
+    if (response.status === 200) {
       navigate("/profile");
     } else {
       const errorResponse = await response.json();
@@ -51,23 +78,22 @@ function EditJob() {
   return (
     <div>
       <Navbar />
-      Add New Job
+      Edit job
       <form onSubmit={handleSubmit}>
         <label>
           Job Title:{" "}
           <input
             type="text"
             value={title}
-            onChange={(event) => setTitle(event.target.value)}
+            onChange={(event) => setTitle(event.target.value )}
           />
         </label>
         <label>
           Location:{" "}
           <input
             type="text"
-            placeholder="which City"
             value={location}
-            onChange={(event) => setLocation(event.target.value)}
+            onChange={(event) => setLocation(event.target.value )}
             required
           />
         </label>
@@ -76,26 +102,25 @@ function EditJob() {
           <select
             type="text"
             value={jobType}
-            onChange={(event) => setJobType(event.target.value)}
+            onChange={(event) => setJobType(event.target.value )}
             required
           >
-          <option>Please Select</option>
-            <option>Producer</option>
-            <option>Mixing Engineer</option>
-            <option>Mastering Engineer</option>
-            <option>Songwriter</option>
-            <option>Beatmaker</option>
+            <option>Please Select</option>
+            <option value="Producer">Producer</option>
+            <option value="Mixing Engineer">Mixing Engineer</option>
+            <option value="Mastering Engineer">Mastering Engineer</option>
+            <option value="Songwriter">Songwriter</option>
+            <option value="Beatmaker">Beatmaker</option>
           </select>
         </label>
         <label>
           Information:{" "}
           <textarea
             name="information"
-            placeholder="Please give a description of the available Job"
             cols="30"
             rows="10"
             value={description}
-            onChange={(event) => setDescription(event.target.value)}
+            onChange={(event) => setDescription(event.target.value )}
             required
           />
         </label>
@@ -103,15 +128,12 @@ function EditJob() {
           Contact Number:{" "}
           <input
             type="text"
-            placeholder="incl. Country code"
             value={contactNumber}
-            onChange={(event) => setContactNumber(event.target.value)}
+            onChange={(event) => setContactNumber(event.target.value )}
           />
         </label>
         {errorMessage && <p className="errorMessage">{errorMessage}</p>}
-        <button className="formBtn" type="submit">
-          Post a Job
-        </button>
+        <button className="formBtn" type="submit">UPDATE</button>
       </form>
       <Footer />
     </div>
