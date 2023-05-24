@@ -6,7 +6,6 @@ import { SessionContext } from "../contexts/SessionContext";
 
 /* import React from 'react' */
 
-
 function CreateJob() {
     const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");

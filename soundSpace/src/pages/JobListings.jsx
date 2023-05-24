@@ -2,6 +2,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 /* import { SessionContext } from "../contexts/SessionContext"; */
 
 function JobListings() {
@@ -51,7 +52,7 @@ function JobListings() {
       <h2>Job Listings</h2>
       <div className="allJobs">
       {jobs.map(job => (
-        <div key={job._id}>
+        <Link key={job._id}>
         <h3>{job.title}</h3>
         <h3>{job.location}</h3>
         <p>{job.createdBy}</p>
@@ -59,8 +60,7 @@ function JobListings() {
         <p>{job.description}</p>
         <p>{job.contactNumber}</p>
         <br></br>
-        </div>
-        
+        </Link>
       ))}
       </div>
     </>
