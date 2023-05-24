@@ -1,11 +1,15 @@
 /* import React from 'react' */
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
+import { SessionContext } from "../contexts/SessionContext";
 
 function Profile() {
+
+const {isLoading} = useContext(SessionContext)
+
   const verifyToken = async (currentToken) => {
     const response = await fetch(
       `${import.meta.env.VITE_BASE_API_URL}/auth/verify`,
@@ -22,7 +26,6 @@ function Profile() {
   };
 
   const [userProducer, setUserProducer] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getProfile = async () => {
@@ -42,7 +45,6 @@ function Profile() {
           }
         );
         setUserProducer(response.data);
-        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -54,7 +56,7 @@ function Profile() {
     <div>
       <Navbar />
       Profile this can be deleted later
-      {isLoading ? (
+      {isLoading || userProducer.length === 0 ? (
         <CircularProgress />
       ) : (
         <div>

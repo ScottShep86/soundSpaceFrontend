@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 function LogIn() {
   const navigate = useNavigate();
 
-  const { setToken } = useContext(SessionContext);
+  const { setToken, setIsLoading } = useContext(SessionContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,6 +26,7 @@ function LogIn() {
       if (response.status === 200) {
       const tokenFromResponse = await response.json();
       setToken(tokenFromResponse);
+      setIsLoading(false)
       navigate(`/profile`);
     } else {
       const errorResponse = await response.json();

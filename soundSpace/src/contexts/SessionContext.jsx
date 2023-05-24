@@ -51,7 +51,7 @@ const SessionContextProvider = (props) => {
   }
 
   return (
-    <SessionContext.Provider value={{ token, setToken, isLoggedIn, isLoading, logout, verifyToken }}>
+    <SessionContext.Provider value={{ token, setToken, isLoggedIn, isLoading, setIsLoading, logout, verifyToken }}>
       {props.children}
     </SessionContext.Provider>
   )
