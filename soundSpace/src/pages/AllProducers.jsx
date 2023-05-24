@@ -13,7 +13,7 @@ function AllProducers() {
 
   const getAllProducers = async () => {
     try {
-      const response = await axios.get('EXAMPLE')
+      const response = await axios.get(`${import.meta.env.VITE_BASE_API_URL}/api/producers`)
       setProducers(response.data)
       setIsLoading(false)
     } catch (error) {

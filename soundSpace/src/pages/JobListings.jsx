@@ -7,7 +7,7 @@ import { SessionContext } from "../contexts/SessionContext";
 
 function JobListings() {
   const [isTabOpen, setIsTabOpen] = useState(false);
-  const { token } = useContext(SessionContext);
+  /* const { token } = useContext(SessionContext); */
 
   const handleButtonClick = () => {
     setIsTabOpen(!isTabOpen);

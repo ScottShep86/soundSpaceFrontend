@@ -23,7 +23,7 @@ function LogIn() {
       body: JSON.stringify({ email, password }),
     });
 
-    if (response.status === 200) {
+      if (response.status === 200) {
       const tokenFromResponse = await response.json();
       setToken(tokenFromResponse);
       navigate(`/profile`);
@@ -37,12 +37,12 @@ function LogIn() {
     <div>
       <Navbar />
       <h2>LogIn</h2>
-    <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label>E-Mail Address: <input name="email" type='email' required value={email} onChange={event => setEmail(event.target.value)}/></label>
         <label>Password: <input name="password" type='password' required value={password} onChange={event => setPassword(event.target.value)}/></label>
         {errorMessage && <p className='errorMessage'>{errorMessage}</p>}
         <button className='formBtn' type='submit'>LogIn</button>
-        </form>
+      </form>
       <p>Not a User?</p>
       <Link to={'/signup'}>Sign Up as a Producer</Link>
       <Footer />

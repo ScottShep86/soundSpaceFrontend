@@ -21,16 +21,16 @@ const SessionContextProvider = (props) => {
       setToken(currentToken)
       setIsLoggedIn(true)
       console.log("I am parsed", parsed)
-    }
+      }
     setIsLoading(false)
     console.log("first")
-  }
+    }
 
   useEffect(() => {
     const localToken = localStorage.getItem('authToken')
     if (localToken) {
       verifyToken(localToken)
-    }
+  }
   }, [])
 
   useEffect(() => {
