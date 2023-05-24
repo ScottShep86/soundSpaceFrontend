@@ -61,6 +61,7 @@ function SignUpP() {
         <label>About me: <input type="aboutMe" value={aboutMe} onChange={event => setAboutMe(event.target.value)}/></label>
         <label>Associated Acts: <input type="associatedActs" value={associatedActs} onChange={event => setAssociatedActs(event.target.value)}/></label>
         <label>Genre: <select type="genre" value={genre} onChange={event => setGenre(event.target.value)}>
+        <option>Please Select</option>
         <option>Rock</option>
         <option>Pop</option>
         <option>Classical</option>

@@ -3,13 +3,14 @@ import HomePage from './pages/HomePage';
 import LogIn from './pages/LogIn';
 import SignUpP from './pages/SignUpP';
 import Profile from './pages/Profile';
-import EditProfile from './pages/EditProfile';
+/* import EditProfile from './pages/EditProfile'; */
 import AllProducers from './pages/AllProducers';
 import AllRecordLabels from './pages/AllRecordLabels';
 import AllMusicians from './pages/AllMusicians';
 import StageCrew from './pages/StageCrew'
 import JobListings from './pages/JobListings';
 import CreateJob from './pages/CreateJob';
+import EditJob from './pages/EditJob';
 
 function App() {
   return (
@@ -18,12 +19,13 @@ function App() {
       <Route path='/login' element={<LogIn />}/>
       <Route path='/signup' element={<SignUpP />}/>
       <Route path='/profile' element={<Profile />}/>
-      <Route path='/profile/:id/edit' element={<EditProfile />}/>
+      {/* <Route path='/profile/:id/edit' element={<EditProfile />}/> */}
       <Route path='/producers' element={<AllProducers />}/>
       <Route path='/record-labels' element={<AllRecordLabels />}/>
       <Route path='/musicians' element={<AllMusicians />}/>
       <Route path='/stage-crew' element={<StageCrew />}/>
       <Route path='/jobs/create' element={<CreateJob/>} />
+      <Route path='/profile/:id/edit' element={<EditJob/>}/>
       <Route path='/jobs' element={<JobListings />}/>
     </Routes>
   )

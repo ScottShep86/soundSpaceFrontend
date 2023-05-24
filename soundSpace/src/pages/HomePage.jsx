@@ -19,6 +19,7 @@ function HomePage() {
     {isLoggedIn ? ( 
       <div className='btnLinks'>
     <Link className='btn' to={'/profile'}>My Profile</Link>
+    <Link className='btn' to={'/jobs'}>Job Listings</Link>
     </div>
     ) : (
       <div className='btnLinks'>
