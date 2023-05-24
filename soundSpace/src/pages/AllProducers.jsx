@@ -40,11 +40,11 @@ function AllProducers() {
   return (
     <div>
       <Navbar />
-      AllProducers this can be deleted later
+      <h2>AllProducers</h2>
       {producers.map(producer => (
           <div key={producer._id}>
-          <img src={producer.picture} alt="profile picture"/>
           <h3>{producer.name}</h3>
+          <img src={producer.picture} alt="profile picture"/>
             <p>{producer.location}</p>
             <p>{producer.genre}</p>
           </div>

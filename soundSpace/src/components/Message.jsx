@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 
 
@@ -7,8 +6,6 @@ function Message() {
     const [comment, setComment] = useState("");
   
     const [errorMessage, setErrorMessage] = useState("");
-  
-    const navigate = useNavigate();
   
     const { token } = useContext(SessionContext);
     
@@ -28,7 +25,7 @@ function Message() {
           }
         );
         if (response.status === 201) {
-          navigate("/jobs/:jobId");
+          event.target.reset()
           setComment("")
         } else {
           const errorResponse = await response.json();

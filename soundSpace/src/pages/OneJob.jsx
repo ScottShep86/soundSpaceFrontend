@@ -29,6 +29,24 @@ function OneJob() {
         }
     }
 
+    /* const fetchMessages = async () => {
+        try {
+                const response = await fetch(`${import.meta.env.VITE_BASE_API_URL}/api/messages/${messageId}`, {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              );
+            if (response.status === 200) {
+                console.log(response)
+                const parsed = await response.json()
+                setMessage(parsed)
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    } */
+
     useEffect(() => {
         fetchJob()
     }, [])
@@ -50,6 +68,7 @@ function OneJob() {
             </>
           )}
           <Message />
+
     <Footer />
     </div>
   );
