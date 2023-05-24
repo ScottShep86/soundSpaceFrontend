@@ -3,7 +3,7 @@ import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import { useEffect, useState } from "react"
 /* import { Link } from "react-router-dom" */
-import CircularProgress from '@mui/material/CircularProgress'
+/* import CircularProgress from '@mui/material/CircularProgress' */
 
 function AllProducers() {
 

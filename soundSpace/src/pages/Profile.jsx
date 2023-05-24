@@ -3,12 +3,12 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import CircularProgress from "@mui/material/CircularProgress";
-import { SessionContext } from "../contexts/SessionContext";
+/* import CircularProgress from "@mui/material/CircularProgress";
+import { SessionContext } from "../contexts/SessionContext"; */
 
 function Profile() {
 
-const {isLoading} = useContext(SessionContext)
+/* const {isLoading} = useContext(SessionContext) */
 
   const verifyToken = async (currentToken) => {
     const response = await fetch(
@@ -56,9 +56,6 @@ const {isLoading} = useContext(SessionContext)
     <div>
       <Navbar />
       Profile this can be deleted later
-      {isLoading || userProducer.length === 0 ? (
-        <CircularProgress />
-      ) : (
         <div>
         <div>
           <h3>{userProducer.name}</h3>
@@ -70,7 +67,6 @@ const {isLoading} = useContext(SessionContext)
           <p>Genre: {userProducer.genre}</p>
           </div>
         </div>
-      )}
       <Footer />
     </div>
   );
