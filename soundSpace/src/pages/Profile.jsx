@@ -74,7 +74,7 @@ function Profile() {
     getMyJobs();
   }, []);
 
-  /*  useEffect(() => {
+   /* useEffect(() => {
 }, [userJobs]) */
 
 const handleDelete = async (jobId) => {
@@ -89,6 +89,9 @@ const handleDelete = async (jobId) => {
       },
     }
   );
+  if(response.status === 200) {
+    setUserJobs(userJobs.filter((job) => job._id !== jobId));
+  }
     console.log(response)
   } catch (error) {
     console.error(error)
@@ -117,7 +120,7 @@ const handleDelete = async (jobId) => {
             <div key={job._id}>
               <h3>{job.title}</h3>
               <p>{job.description}</p>
-              <Link to={`/profile/${job._id}/edit`}>Edit Job</Link>
+              <Link to={{pathname: `/profile/${job._id}/edit`, state: {job:job} }}>Edit Job</Link>
               <button onClick={() => handleDelete(job._id)}>Delete Job</button>
             </div>
           );

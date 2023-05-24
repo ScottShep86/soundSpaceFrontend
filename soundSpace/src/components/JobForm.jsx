@@ -35,7 +35,7 @@ function JobForm() {
       }
     );
     if (response.status === 201) {
-      navigate("/jobs");
+      navigate("/profile");
     } else {
       const errorResponse = await response.json();
       setErrorMessage(errorResponse.message);
