@@ -1,18 +1,19 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 
-function Message() {
+
+function Message({shouldCheckNew, setShouldCheckNew}) {
     const [comment, setComment] = useState("");
-  
     const [errorMessage, setErrorMessage] = useState("");
-  
     const { token } = useContext(SessionContext);
+    const jobId = useParams()
     
     const jobId = useParams()
 
     const handleSubmit = async (event) => {
+      try {
         event.preventDefault();
         const response = await fetch(
           `${import.meta.env.VITE_BASE_API_URL}/api/messages`,
@@ -23,18 +24,28 @@ function Message() {
               "Authorization": `Bearer ${token}`,
             },
             body: JSON.stringify({
-              comment, jobId
+              comment,
+              jobId,
             }),
           }
         );
         if (response.status === 201) {
           event.target.reset()
           setComment("")
+          setShouldCheckNew(shouldCheckNew + 1)
         } else {
           const errorResponse = await response.json();
           setErrorMessage(errorResponse.message);
         }
+      } catch (error) {
+        console.log(error)
+      }
       };
+
+      useEffect(() => {
+
+      }, []);
+
 
   return (
     <div>
