@@ -127,14 +127,17 @@ const handleDelete = async (jobId) => {
         <div className="allJobs">
         {userJobs.map((job) => {
           return (
+            <>
+            <button className="deleteBtn" onClick={() => handleDelete(job._id)}>Delete Job</button>
             <Link to={`/jobs/${job._id}`} key={job._id}>
               <h3>{job.title}</h3>
               <p>{job.description}</p>
               <div className="jobBtns">
               <Link className="editBtn" to={{pathname: `/profile/${job._id}/edit` }}>Edit Job</Link>
-              <button className="deleteBtn" onClick={() => handleDelete(job._id)}>Delete Job</button>
+              
               </div>
             </Link>
+            </>
           );
         })}
         </div>
