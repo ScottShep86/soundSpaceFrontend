@@ -8,7 +8,6 @@ function SignUpP() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [picture, setPicture] = useState("");
   const [location, setLocation] = useState("");
   const [aboutMe, setAboutMe] = useState("");
   const [associatedActs, setAssociatedActs] = useState("");
@@ -31,7 +30,6 @@ function SignUpP() {
           name,
           email,
           password,
-          picture,
           location,
           aboutMe,
           associatedActs,
@@ -64,13 +62,12 @@ function SignUpP() {
         <label>Password: <input type="password" required value={password} onChange={event => setPassword(event.target.value)}/></label>
         </div>
         <div className="inputField">
-        <label>Picture: <input type="picture" value={picture} onChange={event => setPicture(event.target.value)}/></label>
-        </div>
-        <div className="inputField">
         <label>Location: <input type="location" value={location} onChange={event => setLocation(event.target.value)}/></label>
         </div>
         <div className="inputField">
-        <label>About me: <input type="aboutMe" value={aboutMe} onChange={event => setAboutMe(event.target.value)}/></label>
+        <label>About me: <textarea type="aboutMe" placeholder="Tell us a litte about yourself..."
+            cols="30"
+            rows="10" value={aboutMe} onChange={event => setAboutMe(event.target.value)}/></label>
         </div>
         <div className="inputField">
         <label>Associated Acts: <input type="associatedActs" value={associatedActs} onChange={event => setAssociatedActs(event.target.value)}/></label>

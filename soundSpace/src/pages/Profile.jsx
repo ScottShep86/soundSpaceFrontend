@@ -72,8 +72,8 @@ function Profile() {
     }
   };
   useEffect(() => {
-    getProfile();
     getMyJobs();
+    getProfile();
   }, []);
 
   /* useEffect(() => {
