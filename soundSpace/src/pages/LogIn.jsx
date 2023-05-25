@@ -35,17 +35,27 @@ function LogIn() {
   };
 
   return (
-    <div>
+    <div className="page">
       <Navbar />
+      <div className="pageView">
       <h2>LogIn</h2>
       <form onSubmit={handleSubmit}>
+      <div className="inputField">
         <label>E-Mail Address: <input name="email" type='email' required value={email} onChange={event => setEmail(event.target.value)}/></label>
+        </div>
+        <div>
         <label>Password: <input name="password" type='password' required value={password} onChange={event => setPassword(event.target.value)}/></label>
-        {errorMessage && <p className='errorMessage'>{errorMessage}</p>}
+        </div>
+        <div className="authSection">
+        <br></br>
         <button className='formBtn' type='submit'>LogIn</button>
-      </form>
+        <br></br>
       <p>Not a User?</p>
-      <Link to={'/signup'}>Sign Up as a Producer</Link>
+      <Link className="authLink" to={'/signup'}>Sign Up as a Producer</Link>
+      {errorMessage && <p className='errorMessage'>{errorMessage}</p>}
+      </div>
+      </form>
+      </div>
       <Footer />
     </div>
   );

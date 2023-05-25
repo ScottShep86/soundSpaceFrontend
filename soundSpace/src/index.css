@@ -121,6 +121,13 @@ h1 {
   width: 100vw;
 }
 
+.pageView {
+  margin: 50px 50px 0 50px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .linkImg {
   width: 300px;
 }
@@ -159,12 +166,13 @@ h1 {
 .formBtn {
   font-family: 'Rajdhani', sans-serif;
   font-weight: 600;
+  font-size: 1rem;
   text-decoration: none;
   background-color: black;
   color: white;
   border-radius: 10px;
-  padding: 10px;
-  margin: 7px; 
+  height: 30px;
+  width: 150px
 }
 
 .footer {
@@ -254,8 +262,16 @@ label {
   padding: 70px;
 }
 
-input[type=text], select, textarea {
-  width: 100%;
+input, textarea {
+  width: 250px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+select {
+  width: 268px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -264,39 +280,113 @@ input[type=text], select, textarea {
 
 label {
   padding: 12px 12px 12px 0;
-  display: inline-block;
+
 }
 
-.col-25 {
-  float: left;
-  width: 40%;
-  margin-top: 6px;
+form {
+  display: flex;
+  flex-direction: column;
 }
 
-.col-75 {
-  float: left;
-  width: 60%;
-  margin-top: 14px;
+.inputField {
+
 }
 
-.row::after {
-  content: "";
-  display: table;
-  clear: both;
+.authSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.authLink {
+  padding: 0 10px;
+  text-decoration: none;
+  color: blue;
+}
+.profileView {
+  margin: 30px 30px 0 30px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.tab-content {
-  height: 0;
-  overflow: hidden;
-  transition: height 0.3s ease;
+.profileName {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
-.tab-content.open {
-  height: 300px;
-  position: absolute;
-  background-color:rgb(225, 225, 221);
-  border: solid 1px black;
-  padding: 6px;
+.profileImg {
+  height: 150px;
+  border-radius: 200px;
+}
+
+.imgInfoCard {
+  height:fit-content;
+  padding: 10px 0;
+  display:flex;
+  flex-direction: row;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+}
+
+.bio {
+  height:fit-content;
+  padding: 10px 0;
+}
+
+.profileBtn {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  width: 150px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.editBtn {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width:60px;
+  height: 23px;
+}
+
+.deleteBtn {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  background-color: #8B0000;
+  color: white;
+  border-radius: 10px;
+}
+
+.jobBtns {
+  gap: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
 }
 
 .allJobs {

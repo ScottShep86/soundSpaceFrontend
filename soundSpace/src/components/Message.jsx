@@ -3,12 +3,15 @@ import { SessionContext } from "../contexts/SessionContext";
 import { useParams } from "react-router";
 
 
+
 function Message({shouldCheckNew, setShouldCheckNew}) {
     const [comment, setComment] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const { token } = useContext(SessionContext);
     const jobId = useParams()
     
+    const jobId = useParams()
+
     const handleSubmit = async (event) => {
       try {
         event.preventDefault();
