@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext";
+import { useParams } from "react-router-dom";
 
 
 function Message() {
@@ -9,6 +10,8 @@ function Message() {
   
     const { token } = useContext(SessionContext);
     
+    const jobId = useParams()
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const response = await fetch(
@@ -20,7 +23,7 @@ function Message() {
               "Authorization": `Bearer ${token}`,
             },
             body: JSON.stringify({
-              comment,
+              comment, jobId
             }),
           }
         );

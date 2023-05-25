@@ -4,8 +4,8 @@ import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-/* import CircularProgress from "@mui/material/CircularProgress";
-import { SessionContext } from "../contexts/SessionContext"; */
+import ProfilePic from "../assets/images/alexey-ruban-73o_FzZ5x-w-unsplash.png"
+/* import CircularProgress from "@mui/material/CircularProgress"; */
 
 function Profile() {
   /* const {isLoading} = useContext(SessionContext) */
@@ -101,17 +101,27 @@ const handleDelete = async (jobId) => {
   return (
     <div>
       <Navbar />
-      Profile this can be deleted later
-      <div>
-        <h3>{userProducer.name}</h3>
-        <img src={userProducer.picture} alt="profile picture" />
-        <p>City: {userProducer.location}</p>
-        <p>Associated Acts: {userProducer.associatedActs}</p>
-        <p>Bio: {userProducer.aboutMe}</p>
-        <p>{userProducer.favoriteProducers}</p>
-        <p>Genre: {userProducer.genre}</p>
+      <div className="profileView">
+      <div className="profileCard">
+        <h1 className="profileName">{userProducer.name}</h1>
+        <div className="imgInfoCard">
+        <img className="profileImg" src={ProfilePic} alt="profile picture" />
+        <div className="profileInfo">
+        <p>CITY: {userProducer.location}</p>
+        <br></br>
+        <p>GENRE: {userProducer.genre}</p>
+        <br></br>
+        <p>ASSOCIATED ACTS: {userProducer.associatedActs}</p>
+        </div>
+        </div>
+        <div className="bio">
+        <p>ABOUT ME: {userProducer.aboutMe}</p>
+        </div>
       </div>
-      <Link to="/jobs/create">Create a Job</Link>
+      <div>
+      <br></br>
+      <Link className="profileBtn" to="/jobs/create">Create a Job</Link>
+      </div>
       <div>
         <h3>My {userJobs.length} posted Jobs</h3>
         <div className="allJobs">
@@ -120,12 +130,15 @@ const handleDelete = async (jobId) => {
             <Link to={`/jobs/${job._id}`} key={job._id}>
               <h3>{job.title}</h3>
               <p>{job.description}</p>
-              <Link to={{pathname: `/profile/${job._id}/edit` }}>Edit Job</Link>
-              <button onClick={() => handleDelete(job._id)}>Delete Job</button>
+              <div className="jobBtns">
+              <Link className="editBtn" to={{pathname: `/profile/${job._id}/edit` }}>Edit Job</Link>
+              <button className="deleteBtn" onClick={() => handleDelete(job._id)}>Delete Job</button>
+              </div>
             </Link>
           );
         })}
         </div>
+      </div>
       </div>
       <Footer />
     </div>

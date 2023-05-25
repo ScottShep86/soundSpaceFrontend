@@ -50,16 +50,32 @@ function SignUpP() {
   return (
     <div className="page">
       <Navbar />
+      <div className="pageView">
       <h2>SignUp</h2>
 
       <form onSubmit={handleSubmit}>
-        <label>Name: <input type="name" required value={name} onChange={event => setName(event.target.value)}/></label>
+        <div className="inputField">
+        <label >Name: <input type="name" required value={name} onChange={event => setName(event.target.value)}/></label>
+        </div>
+        <div className="inputField">
         <label>E-Mail: <input type="email" required value={email} onChange={event => setEmail(event.target.value)}/></label>
+        </div>
+        <div className="inputField">
         <label>Password: <input type="password" required value={password} onChange={event => setPassword(event.target.value)}/></label>
+        </div>
+        <div className="inputField">
         <label>Picture: <input type="picture" value={picture} onChange={event => setPicture(event.target.value)}/></label>
+        </div>
+        <div className="inputField">
         <label>Location: <input type="location" value={location} onChange={event => setLocation(event.target.value)}/></label>
+        </div>
+        <div className="inputField">
         <label>About me: <input type="aboutMe" value={aboutMe} onChange={event => setAboutMe(event.target.value)}/></label>
+        </div>
+        <div className="inputField">
         <label>Associated Acts: <input type="associatedActs" value={associatedActs} onChange={event => setAssociatedActs(event.target.value)}/></label>
+        </div>
+        <div className="inputField">
         <label>Genre: <select type="genre" value={genre} onChange={event => setGenre(event.target.value)}>
         <option>Please Select</option>
         <option>Rock</option>
@@ -75,11 +91,17 @@ function SignUpP() {
         <option>Metal</option>
         </select>
         </label>
-        {errorMessage && <p className='errorMessage'>{errorMessage}</p>}
+        </div>
+        <div className="authSection">
+        <br></br>
         <button className='formBtn' type="submit">SignUp</button>
+        <br></br>
         <p>Already a User?</p>
-        <Link to={"/login"}>LogIn to your account</Link>
+        <Link className="authLink" to={"/login"}>LogIn to your account</Link>
+        {errorMessage && <p className='errorMessage'>{errorMessage}</p>}
+        </div>
       </form>
+      </div>
       <Footer />
     </div>
   );
