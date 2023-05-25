@@ -74,6 +74,7 @@ function Profile() {
   useEffect(() => {
     getMyJobs();
     getProfile();
+    window.location.reload()
   }, []);
 
   /* useEffect(() => {

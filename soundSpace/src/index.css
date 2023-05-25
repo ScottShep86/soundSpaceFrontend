@@ -200,7 +200,6 @@ p {
 }
 
 .container {
-  
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -330,6 +329,11 @@ form {
 }
 
 .profileImg {
+  height: 150px;
+  border-radius: 200px;
+}
+
+.allProducersImg {
   height: 150px;
   border-radius: 200px;
 }
