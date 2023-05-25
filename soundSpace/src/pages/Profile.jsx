@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import ProfilePic from "../assets/images/alexey-ruban-73o_FzZ5x-w-unsplash.png"
+import ProfilePic from "../assets/images/alexey-ruban-73o_FzZ5x-w-unsplash.png";
 /* import CircularProgress from "@mui/material/CircularProgress"; */
 
 function Profile() {
@@ -12,6 +12,8 @@ function Profile() {
 
   const [userProducer, setUserProducer] = useState([]);
   const [userJobs, setUserJobs] = useState([]);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [jobIdToDelete, setJobIdToDelete] = useState('');
 
   const verifyToken = async (currentToken) => {
     const response = await fetch(
@@ -74,74 +76,122 @@ function Profile() {
     getMyJobs();
   }, []);
 
-   /* useEffect(() => {
+  /* useEffect(() => {
 }, [userJobs]) */
 
-const handleDelete = async (jobId) => {
-  try {
-    const localToken = localStorage.getItem("authToken");
+  const handleDelete = async (jobId) => {
+    try {
+      const localToken = localStorage.getItem("authToken");
       if (!localToken) return;
       await verifyToken(localToken);
-    console.log(jobId)
-    const response = await axios.delete(`${import.meta.env.VITE_BASE_API_URL}/profile/${jobId}/jobs`, {
-      headers: {
-        Authorization: `Bearer ${localToken}`,
-      },
+      console.log(jobId);
+      const response = await axios.delete(
+        `${import.meta.env.VITE_BASE_API_URL}/profile/${jobId}/jobs`,
+        {
+          headers: {
+            Authorization: `Bearer ${localToken}`,
+          },
+        }
+      );
+      if (response.status === 200) {
+        setUserJobs(userJobs.filter((job) => job._id !== jobId));
+      }
+      console.log(response);
+    } catch (error) {
+      console.error(error);
     }
-  );
-  if(response.status === 200) {
-    setUserJobs(userJobs.filter((job) => job._id !== jobId));
-  }
-    console.log(response)
-  } catch (error) {
-    console.error(error)
-  }
-} 
+  };
+
+  const handleDeleteConfirmation = (jobId) => {
+    setConfirmDelete(true);
+    setJobIdToDelete(jobId);
+  };
+
+  const handleCancelDelete = () => {
+    setConfirmDelete(false);
+    setJobIdToDelete('');
+  };
 
   return (
     <div>
       <Navbar />
       <div className="profileView">
-      <div className="profileCard">
-        <h1 className="profileName">{userProducer.name}</h1>
-        <div className="imgInfoCard">
-        <img className="profileImg" src={ProfilePic} alt="profile picture" />
-        <div className="profileInfo">
-        <p>CITY: {userProducer.location}</p>
-        <br></br>
-        <p>GENRE: {userProducer.genre}</p>
-        <br></br>
-        <p>ASSOCIATED ACTS: {userProducer.associatedActs}</p>
+        <div className="profileCard">
+          <h1 className="profileName">{userProducer.name}</h1>
+          <div className="imgInfoCard">
+            <img
+              className="profileImg"
+              src={ProfilePic}
+              alt="profile picture"
+            />
+            <div className="profileInfo">
+              <p><strong>CITY: </strong>{userProducer.location}</p>
+            
+              <p><strong>GENRE: </strong>{userProducer.genre}</p>
+              <br></br>
+            </div>
+          </div>
+          <div className="bio">
+              <p><strong>ASSOCIATED ACTS: </strong>{userProducer.associatedActs}</p>
+          </div>
+          <br></br>
+          <div className="bio">
+            <p><strong>ABOUT ME: </strong>{userProducer.aboutMe}</p>
+          </div>
         </div>
+        <div>
+          <br></br>
+          <Link className="profileBtn" to="/jobs/create">
+            Create a Job
+          </Link>
+          <br></br>
         </div>
-        <div className="bio">
-        <p>ABOUT ME: {userProducer.aboutMe}</p>
+        <div>
+          <h3>POSTED JOBS ({userJobs.length}) </h3>
+          <div className="allJobsProfile">
+            {userJobs.map((job) => {
+              return (
+                <>
+                  <div className="jobPostsProfile">
+                    <Link className="link" to={`/jobs/${job._id}`} key={job._id}>
+                      <h3>{job.title}</h3>
+                      <p>{job.description}</p>
+                      <br></br>
+                    </Link>
+                    <div className="jobBtns">
+                    
+                      <Link
+                        className="editBtn"
+                        to={{ pathname: `/profile/${job._id}/edit` }}
+                      >
+                        Edit Job
+                        </Link>
+                      {confirmDelete && jobIdToDelete === job._id ? (
+                        <>
+                          <button className="editBtn" onClick={handleCancelDelete}>
+                            Cancel
+                          </button>
+                          <button className="deleteBtn" onClick={() => handleDelete(job._id)}>
+                            Confirm
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          className="deleteBtn"
+                          onClick={() => handleDeleteConfirmation(job._id)}
+                        >
+                          Delete Job
+                        </button>
+                      )}
+                    </div>
+                    <br></br>
+                  </div>
+                  <br></br>
+                </>
+              );
+            })}
+          </div>
         </div>
-      </div>
-      <div>
-      <br></br>
-      <Link className="profileBtn" to="/jobs/create">Create a Job</Link>
-      </div>
-      <div>
-        <h3>My {userJobs.length} posted Jobs</h3>
-        <div className="allJobs">
-        {userJobs.map((job) => {
-          return (
-            <>
-            <button className="deleteBtn" onClick={() => handleDelete(job._id)}>Delete Job</button>
-            <Link to={`/jobs/${job._id}`} key={job._id}>
-              <h3>{job.title}</h3>
-              <p>{job.description}</p>
-              <div className="jobBtns">
-              <Link className="editBtn" to={{pathname: `/profile/${job._id}/edit` }}>Edit Job</Link>
-              
-              </div>
-            </Link>
-            </>
-          );
-        })}
-        </div>
-      </div>
       </div>
       <Footer />
     </div>

@@ -31,22 +31,30 @@ function JobListings() {
   return (
     <div>
       <Navbar />
+      <div className="pageView">
       <>
       <h2>Job Listings</h2>
-      <div className="allJobs">
+      <br></br>
+      <div className="allJobsListings">
+      
       {jobs.map(job => (
-        <Link key={job._id} to={`/jobs/${job._id}`}>
+        
+        <Link className="link" key={job._id} to={`/jobs/${job._id}`}>
+        <div className="jobPostsListings">
         <h3>{job.title}</h3>
         <h3>{job.location}</h3>
         <p>{job.jobType}</p>
         <br></br>
+        </div>
         </Link>
         
       ))}
       </div>
+     
     </>
-      
+    </div>
       <Footer />
+      
     </div>
   );
 }

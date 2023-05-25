@@ -76,15 +76,21 @@ function OneJob() {
     return (
         <div>
           <Navbar />
+          <div className="pageView">
           {job && (
             <>
-              <h1>Job Details: {job.title}</h1>
-              <h2>Location: {job.location}</h2>
-              <h2>Job Type: {job.jobType}</h2>
-              <h2>Description: {job.description}</h2>
-              <h2>Contact Number: {job.contactNumber}</h2>
+            <div className="bio">
+              <h2>Job Details: {job.title}</h2>
+              <br></br>
+              <h4>Location: </h4><p>{job.location}</p>
+              
+              <h4>Job Type: </h4><p>{job.jobType}</p>
+              <h4>Description: </h4><p>{job.description}</p>
+              <h4>Contact Number: </h4><p>{job.contactNumber}</p>
+              </div>
             </>
           )}
+          <br></br>
           <Message shouldCheckNew={shouldCheckNew} setShouldCheckNew={setShouldCheckNew}/>
           <>
           <h3>Last messages:</h3>
@@ -113,7 +119,7 @@ function OneJob() {
             ))}
 
           </>
-
+</div>
     <Footer />
     </div>
   );

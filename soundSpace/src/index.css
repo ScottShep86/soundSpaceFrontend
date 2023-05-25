@@ -71,19 +71,24 @@ button:focus-visible {
 
 * {
   margin: 0;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 body {
   margin-bottom: 70px;
 }
 
-h1, h2 {
+h1, h2, h3 {
   font-family: 'Rajdhani', sans-serif;
   text-align: center;
 }
 
 h1 {
   font-size: 4rem;
+}
+
+p {
+  font-size: 1.1rem;
 }
 
 .logo {
@@ -95,6 +100,7 @@ h1 {
 }
 
 .navbar {
+  padding: 10px;
   color:white;
   background-color: black;
   display: flex;
@@ -122,7 +128,7 @@ h1 {
 }
 
 .pageView {
-  margin: 50px 50px 0 50px;
+  margin: 30px 50px 0 50px;
   display:flex;
   flex-direction: column;
   align-items: center;
@@ -184,6 +190,13 @@ h1 {
     left: 0;
     bottom: 0;
     width: 100%;
+}
+
+.footerLogo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  fill: white;
 }
 
 .container {
@@ -259,7 +272,7 @@ label {
 }
 
 .aboutUs {
-  padding: 70px;
+  padding: 10px 30px 10px 30px;
 }
 
 input, textarea {
@@ -289,7 +302,8 @@ form {
 }
 
 .inputField {
-
+  display: flex;
+  flex-direction: column;
 }
 
 .authSection {
@@ -303,7 +317,7 @@ form {
   color: blue;
 }
 .profileView {
-  margin: 30px 30px 0 30px;
+  margin: 10px 30px 0 30px;
   display:flex;
   flex-direction: column;
   align-items: center;
@@ -325,18 +339,22 @@ form {
   padding: 10px 0;
   display:flex;
   flex-direction: row;
+  gap: 10px;
 }
 
 .profileInfo {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
 
 }
 
 .bio {
   height:fit-content;
-  padding: 10px 0;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px  black;
 }
 
 .profileBtn {
@@ -360,8 +378,8 @@ form {
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   border-radius: 10px;
   display: flex;
   text-align: center;
@@ -379,24 +397,78 @@ form {
   background-color: #8B0000;
   color: white;
   border-radius: 10px;
+  width: 80px;
 }
 
 .jobBtns {
   gap: 10px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: baseline;
 }
 
-.allJobs {
-  display: flex;
+.allJobsListings {
+  display:flex;
+  flex-direction: row-reverse;
+}
+
+.allJobsProfile {
+  max-width: 100vw;
+  display:flex;
   flex-direction: column-reverse;
 }
 
-@media screen and (max-width: 600px) {
-  .col-25, .col-75, input[type=submit] {
-    width: 100%;
-    margin-top: 0;
+.jobPostsProfile {
+  text-decoration: none;
+  padding: 5px;
+  border: 1px solid white;
+  border-radius: 20px;
+  color: white;
+  background: black;
+  width: 200px;
+}
+
+
+.jobPostsListings {
+  text-decoration: none;
+  padding: 5px;
+  border: 1px solid white;
+  border-radius: 20px;
+  color: white;
+  background: black;
+}
+
+@media screen and (min-width: 490px) {
+    .allJobsProfile {
+      max-width: 100vw;
+      display: flex;
+      flex-direction: row-reverse;
+      flex-wrap: wrap;
+    }
+    .bio {
+      height:fit-content;
+      padding: 10px;
+      border: 1px solid black;
+      border-radius: 20px;
+      box-shadow: 2px 2px 2px  black;
+      display:flex;
+      flex-direction: column;
+      margin: 0 30px 0 30px;
+    }
+    
+}
+
+@media screen and (min-width: 540px) {
+  .profileImg {
+    height: 300px;
+    border-radius: 200px;
+  }
+}
+
+@media screen and (min-width: 590px) {
+  .profileImg {
+    height: 380px;
+    border-radius: 200px;
   }
 }

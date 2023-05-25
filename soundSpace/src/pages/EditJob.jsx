@@ -78,8 +78,10 @@ function EditJob() {
   return (
     <div>
       <Navbar />
-      Edit job
+      <div className="pageView">
+      <h2>Edit job</h2>
       <form onSubmit={handleSubmit}>
+      <div className="inputField">
         <label>
           Job Title:{" "}
           <input
@@ -88,6 +90,7 @@ function EditJob() {
             onChange={(event) => setTitle(event.target.value )}
           />
         </label>
+        </div>
         <label>
           Location:{" "}
           <input
@@ -132,9 +135,12 @@ function EditJob() {
             onChange={(event) => setContactNumber(event.target.value )}
           />
         </label>
-        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+        <div className="authSection">
         <button className="formBtn" type="submit">UPDATE</button>
+        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+        </div>
       </form>
+      </div>
       <Footer />
     </div>
   );

@@ -40,18 +40,22 @@ function Message({shouldCheckNew, setShouldCheckNew}) {
         console.log(error)
       }
       };
-      
+
       useEffect(() => {
       }, [])
 
 
   return (
     <div>
-    Message me:
+    <h5>Message me:</h5>
     <form onSubmit={handleSubmit}>
-        <label>Comment: <textarea name='comment' cols='30' rows='10' value={comment} onChange={(event) => setComment(event.target.value)} required/></label>
+        <label><h5>Comment: </h5><textarea name='comment' cols='30' rows='10' value={comment} onChange={(event) => setComment(event.target.value)} required/></label>
         {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+        <div className="authSection">
+        <br></br>
         <button className="formBtn" type='submit'>Submit Message</button>
+        <br></br>
+        </div>
     </form>
     </div>
   )

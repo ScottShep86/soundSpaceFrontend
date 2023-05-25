@@ -49,7 +49,8 @@ function CreateJob() {
   return (
     <div>
     <Navbar />
-      Add New Job
+    <div className="pageView">
+      <h2>Add New Job</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Job Title:{" "}
@@ -77,6 +78,7 @@ function CreateJob() {
             onChange={(event) => setJobType(event.target.value)}
             required
           >
+          <option>Please Select</option>
             <option>Producer</option>
             <option>Mixing Engineer</option>
             <option>Mastering Engineer</option>
@@ -105,12 +107,14 @@ function CreateJob() {
             onChange={(event) => setContactNumber(event.target.value)}
           />
         </label>
-        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+        <div className="authSection">
         <button className="formBtn" type="submit">
+        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
           Post a Job
         </button>
+        </div>
       </form>
-    
+      </div>
     <Footer />
     </div>
   )
