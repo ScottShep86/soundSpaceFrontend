@@ -15,15 +15,12 @@ const SessionContextProvider = (props) => {
         Authorization: `Bearer ${currentToken}`,
       },
     })
-    console.log(response)
     if (response.status === 200) {
       const parsed = await response.json()
       setToken(currentToken)
       setIsLoggedIn(true)
-      console.log("I am parsed", parsed)
       }
     setIsLoading(false)
-    console.log("first")
     }
 
   useEffect(() => {
@@ -38,7 +35,6 @@ const SessionContextProvider = (props) => {
       localStorage.setItem('authToken', token)
       setIsLoading(false)
       setIsLoggedIn(true)
-      console.log('second')
     } else {
       localStorage.removeItem('authToken')
     }

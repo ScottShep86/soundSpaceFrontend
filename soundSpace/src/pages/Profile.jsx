@@ -63,7 +63,6 @@ function Profile() {
           },
         }
       );
-      console.log("just response", response);
       setUserJobs(response.data);
     } catch (error) {
       console.error(error);
@@ -117,12 +116,15 @@ const handleDelete = async (jobId) => {
         <div className="allJobs">
         {userJobs.map((job) => {
           return (
-            <Link to={`/jobs/${job._id}`} key={job._id}>
-              <h3>{job.title}</h3>
-              <p>{job.description}</p>
-              <Link to={{pathname: `/profile/${job._id}/edit` }}>Edit Job</Link>
-              <button onClick={() => handleDelete(job._id)}>Delete Job</button>
-            </Link>
+            <>
+              <button className="formBtn" onClick={() => handleDelete(job._id)}>Delete Job</button>
+              <Link to={`/jobs/${job._id}`} key={job._id}>
+                <h3>{job.title}</h3>
+                <p>{job.description}</p>
+                <br></br>
+                <Link className="formBtn" to={{pathname: `/profile/${job._id}/edit` }}>Edit Job</Link>
+              </Link>  
+            </>
           );
         })}
         </div>
