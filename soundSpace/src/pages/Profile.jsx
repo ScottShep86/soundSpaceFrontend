@@ -49,6 +49,8 @@ function Profile() {
       setUserProducer(response.data);
     } catch (error) {
       console.log(error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -75,7 +77,7 @@ function Profile() {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
     getMyJobs();
     getProfile();
