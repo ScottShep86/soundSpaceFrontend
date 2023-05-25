@@ -7,14 +7,16 @@ import { Link } from "react-router-dom";
 import ProfilePic from "../assets/images/alexey-ruban-73o_FzZ5x-w-unsplash.png";
 /* import CircularProgress from "@mui/material/CircularProgress"; */
 
+
 function Profile() {
   /* const {isLoading} = useContext(SessionContext) */
-
+  
   const [userProducer, setUserProducer] = useState([]);
   const [userJobs, setUserJobs] = useState([]);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [jobIdToDelete, setJobIdToDelete] = useState('');
-
+  const [loading, setLoading] = useState(true);
+  
   const verifyToken = async (currentToken) => {
     const response = await fetch(
       `${import.meta.env.VITE_BASE_API_URL}/auth/verify`,
@@ -69,8 +71,11 @@ function Profile() {
       setUserJobs(response.data);
     } catch (error) {
       console.error(error);
+    }finally {
+      setLoading(false);
     }
   };
+  
   useEffect(() => {
     getMyJobs();
     getProfile();
@@ -111,6 +116,12 @@ function Profile() {
     setConfirmDelete(false);
     setJobIdToDelete('');
   };
+
+  if (loading) {
+    return (
+      <div>Loading...</div>
+    );
+  }
 
   return (
     <div>
