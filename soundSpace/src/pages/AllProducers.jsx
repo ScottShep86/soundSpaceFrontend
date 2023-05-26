@@ -8,6 +8,7 @@ import ProfilePic from "../assets/images/alexey-ruban-73o_FzZ5x-w-unsplash.png";
 
 function AllProducers() {
   const [producers, setProducers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('')
 
   /*  const getAllProducers = async () => {
     try {
@@ -19,11 +20,16 @@ function AllProducers() {
     }
   }
  */
-  const fetchProducers = async () => {
+  const fetchProducers = async (searchTerm = "") => {
     try {
-      const allProducers = await fetch(
-        `${import.meta.env.VITE_BASE_API_URL}/api/producers`
-      );
+      let endpoint = `${import.meta.env.VITE_BASE_API_URL}/api/producers`
+      if (searchTerm) {
+        endpoint += `?`
+    }
+      if (searchTerm) {
+        endpoint += `search=${searchTerm}`
+    }
+      const allProducers = await fetch(endpoint);
       if (allProducers.status === 200) {
         const parsed = await allProducers.json();
         setProducers(parsed);
@@ -37,11 +43,18 @@ function AllProducers() {
     fetchProducers();
   }, []);
 
+  useEffect(() => {
+      fetchProducers(searchTerm);
+  }, [searchTerm]);
+
   return (
     <div>
       <Navbar />
       <div className="profileView">
         <h2>AllProducers</h2>
+        <div>
+        <label>Search<input value={searchTerm} onChange={event => setSearchTerm(event.target.value) }/></label>
+        </div>
         <br></br>
         <div className="allProducersContainer">
           {producers.map((producer) => (
