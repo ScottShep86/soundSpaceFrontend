@@ -1,7 +1,7 @@
 /* import React from 'react' */
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import ProfilePic from "../assets/images/alexey-ruban-73o_FzZ5x-w-unsplash.png";
@@ -31,65 +31,67 @@ function Profile() {
     }
   };
 
-  useEffect(() => {
-    const localToken = localStorage.getItem("authToken");
+  const getProfile = useCallback(async () => {
+    try {
+      const localToken = localStorage.getItem("authToken");
+      if (!localToken) return;
 
-    if (!localToken) return;
-    const getMyJobs = async () => {
-      try {
-        const user = await verifyToken(localToken);
-        const response = await axios.get(
-          `${import.meta.env.VITE_BASE_API_URL}/profile/${
-            user.producer._id
-          }/jobs`,
-          {
-            headers: {
-              Authorization: `Bearer ${localToken}`,
-            },
-          }
-        );
-        setUserJobs(response.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const getProfile = async () => {
-      try {
-        const user = await verifyToken(localToken);
-        const response = await axios.get(
-          `${import.meta.env.VITE_BASE_API_URL}/profile/${user.producer._id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localToken}`,
-            },
-          }
-        );
-        setUserProducer(response.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    setTimeout(() => {
-      getMyJobs();
-      getProfile();
-    }, 60);
-
-    () => {
-      setUserJobs([]);
-      setUserProducer([]);
-    };
+      const user = await verifyToken(localToken);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_API_URL}/profile/${user.producer._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localToken}`,
+          },
+        }
+      );
+      setUserProducer(response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  const getMyJobs = useCallback(async () => {
+    try {
+      const localToken = localStorage.getItem("authToken");
+      if (!localToken) return;
+      const user = await verifyToken(localToken);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_API_URL}/profile/${
+          user.producer._id
+        }/jobs`,
+        {
+          headers: {
+            Authorization: `Bearer ${localToken}`,
+          },
+        }
+      );
+      console.log("just response", response);
+      setUserJobs(response.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    getMyJobs();
+    getProfile();
+    //resolve profile
+  }, [getMyJobs, getProfile]);
+
+  /* useEffect(() => {
+}, [userJobs]) */
 
   const handleDelete = async (jobId) => {
     try {
       const localToken = localStorage.getItem("authToken");
       if (!localToken) return;
       await verifyToken(localToken);
+      console.log(jobId);
       const response = await axios.delete(
         `${import.meta.env.VITE_BASE_API_URL}/profile/${jobId}/jobs`,
         {
@@ -101,6 +103,7 @@ function Profile() {
       if (response.status === 200) {
         setUserJobs(userJobs.filter((job) => job._id !== jobId));
       }
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
@@ -228,4 +231,3 @@ function Profile() {
 }
 
 export default Profile;
-`
