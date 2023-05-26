@@ -11,8 +11,9 @@ function JobListings() {
  
 
   const [jobs, setJobs] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const fetchJobs = async () => {
+  /* const fetchJobs = async () => {
     try {
         const allJobs = await fetch(`${import.meta.env.VITE_BASE_API_URL}/api/jobs`)
         if(allJobs.status === 200) {
@@ -22,11 +23,34 @@ function JobListings() {
     } catch (error) {
         console.error(error)
     }
-  }
+  } */
+
+  const fetchJobs = async (searchTerm = "") => {
+    try {
+      let endpoint = `${import.meta.env.VITE_BASE_API_URL}/api/jobs`
+      if (searchTerm) {
+        endpoint += `?`
+    }
+      if (searchTerm) {
+        endpoint += `search=${searchTerm}`
+    }
+      const allJobs = await fetch(endpoint);
+      if (allJobs.status === 200) {
+        const parsed = await allJobs.json();
+        setJobs(parsed);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     fetchJobs()
   }, [])
+
+  useEffect(() => {
+    fetchJobs(searchTerm)
+  }, [searchTerm])
 
   return (
     <div>
@@ -34,6 +58,9 @@ function JobListings() {
       <div className="pageView">
       <>
       <h2>Job Listings</h2>
+      <div>
+        <label>Search<input value={searchTerm} onChange={event => setSearchTerm(event.target.value) }/></label>
+        </div>
       <br></br>
       <div className="allJobsListings">
       
