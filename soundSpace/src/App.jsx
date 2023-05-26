@@ -13,7 +13,6 @@ import CreateJob from './pages/CreateJob';
 import EditJob from './pages/EditJob';
 import OneJob from './pages/OneJob';
 import IsPrivate from './components/IsPrivate';
-import IsAnon from './components/IsAnon';
 
 function App() {
   return (

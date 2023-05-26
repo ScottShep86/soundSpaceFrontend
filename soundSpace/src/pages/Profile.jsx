@@ -1,22 +1,21 @@
 /* import React from 'react' */
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import ProfilePic from "../assets/images/alexey-ruban-73o_FzZ5x-w-unsplash.png";
 /* import CircularProgress from "@mui/material/CircularProgress"; */
 
-
 function Profile() {
   /* const {isLoading} = useContext(SessionContext) */
-  
+
   const [userProducer, setUserProducer] = useState([]);
   const [userJobs, setUserJobs] = useState([]);
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const [jobIdToDelete, setJobIdToDelete] = useState('');
+  const [jobIdToDelete, setJobIdToDelete] = useState("");
   const [loading, setLoading] = useState(true);
-  
+
   const verifyToken = async (currentToken) => {
     const response = await fetch(
       `${import.meta.env.VITE_BASE_API_URL}/auth/verify`,
@@ -32,7 +31,7 @@ function Profile() {
     }
   };
 
-  const getProfile = async () => {
+  const getProfile = useCallback(async () => {
     try {
       const localToken = localStorage.getItem("authToken");
       if (!localToken) return;
@@ -49,12 +48,12 @@ function Profile() {
       setUserProducer(response.data);
     } catch (error) {
       console.log(error);
-    }finally {
+    } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const getMyJobs = async () => {
+  const getMyJobs = useCallback(async () => {
     try {
       const localToken = localStorage.getItem("authToken");
       if (!localToken) return;
@@ -73,15 +72,16 @@ function Profile() {
       setUserJobs(response.data);
     } catch (error) {
       console.error(error);
-    }finally {
+    } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getMyJobs();
     getProfile();
-  }, []);
+    //resolve profile problem
+  }, [getMyJobs, getProfile]);
 
   /* useEffect(() => {
 }, [userJobs]) */
@@ -116,19 +116,17 @@ function Profile() {
 
   const handleCancelDelete = () => {
     setConfirmDelete(false);
-    setJobIdToDelete('');
+    setJobIdToDelete("");
   };
 
   if (loading) {
-    return (
-      <div>Loading...</div>
-    );
+    return <div>Loading...</div>;
   }
 
   return (
     <div>
       <Navbar />
-      <div className="profileView" key={userProducer._id}>
+      <div className="profileView">
         <div className="profileCard">
           <h1 className="profileName">{userProducer.name}</h1>
           <div className="imgInfoCard">
@@ -138,18 +136,30 @@ function Profile() {
               alt="profile picture"
             />
             <div className="profileInfo">
-              <p><strong>CITY: </strong>{userProducer.location}</p>
-            
-              <p><strong>GENRE: </strong>{userProducer.genre}</p>
+              <p>
+                <strong>CITY: </strong>
+                {userProducer.location}
+              </p>
+
+              <p>
+                <strong>GENRE: </strong>
+                {userProducer.genre}
+              </p>
               <br></br>
             </div>
           </div>
           <div className="bio">
-              <p><strong>ASSOCIATED ACTS: </strong>{userProducer.associatedActs}</p>
+            <p>
+              <strong>ASSOCIATED ACTS: </strong>
+              {userProducer.associatedActs}
+            </p>
           </div>
           <br></br>
           <div className="bio">
-            <p><strong>ABOUT ME: </strong>{userProducer.aboutMe}</p>
+            <p>
+              <strong>ABOUT ME: </strong>
+              {userProducer.aboutMe}
+            </p>
           </div>
         </div>
         <div>
@@ -166,25 +176,34 @@ function Profile() {
               return (
                 <>
                   <div className="jobPostsProfile">
-                    <Link className="link" to={`/jobs/${job._id}`} key={job._id}>
+                    <Link
+                      className="link"
+                      to={`/jobs/${job._id}`}
+                      key={job._id}
+                    >
                       <h3>{job.title}</h3>
                       <p>{job.description}</p>
                       <br></br>
                     </Link>
                     <div className="jobBtns">
-                    
                       <Link
                         className="editBtn"
                         to={{ pathname: `/profile/${job._id}/edit` }}
                       >
                         Edit Job
-                        </Link>
+                      </Link>
                       {confirmDelete && jobIdToDelete === job._id ? (
                         <>
-                          <button className="editBtn" onClick={handleCancelDelete}>
+                          <button
+                            className="editBtn"
+                            onClick={handleCancelDelete}
+                          >
                             Cancel
                           </button>
-                          <button className="deleteBtn" onClick={() => handleDelete(job._id)}>
+                          <button
+                            className="deleteBtn"
+                            onClick={() => handleDelete(job._id)}
+                          >
                             Confirm
                           </button>
                         </>
