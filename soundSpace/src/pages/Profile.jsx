@@ -128,7 +128,7 @@ function Profile() {
   return (
     <div>
       <Navbar />
-      <div className="profileView">
+      <div className="profileView" key={userProducer._id}>
         <div className="profileCard">
           <h1 className="profileName">{userProducer.name}</h1>
           <div className="imgInfoCard">
