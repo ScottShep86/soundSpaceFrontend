@@ -442,6 +442,7 @@ form {
   border-radius: 20px;
   color: white;
   background: black;
+  max-width: 100px;
 }
 
 @media screen and (min-width: 490px) {
