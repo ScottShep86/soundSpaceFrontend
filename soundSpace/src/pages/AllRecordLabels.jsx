@@ -15,6 +15,7 @@ function AllRecordLabels() {
     //here is for the whole page
         <div> 
         <Navbar />
+        <div className="profileView">
             <h2>All Record Labels</h2>
            {/*  here will contain all containers */}
             <div className="container"> 
@@ -55,6 +56,7 @@ function AllRecordLabels() {
             <img src={Tresor} alt="Tresor" />
             <h2>Tresor Records</h2>
             <h3>Berlin</h3>
+            </div>
             </div>
             </div>
             <Footer />

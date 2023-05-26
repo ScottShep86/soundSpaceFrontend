@@ -42,8 +42,8 @@ function AllProducers() {
       <Navbar />
       <div className="profileView">
         <h2>AllProducers</h2>
-        <div className="profileCard">
-        
+        <br></br>
+        <div className="allProducersContainer">
           {producers.map((producer) => (
             <div key={producer._id}>
               <img
@@ -52,13 +52,18 @@ function AllProducers() {
                 alt="profile picture"
               />
               <h3>{producer.name}</h3>
-              <div className="profileInfo">
-                <p>{producer.location}</p>
-                <p>{producer.genre}</p>
+              <div className="profileInfoAP">
+              <p>
+                <strong>Location: </strong>
+                {producer.location}
+              </p>
+              <p>
+                <strong>Genre: </strong>
+                {producer.genre}
+              </p>
               </div>
             </div>
           ))}
-        
         </div>
       </div>
       <Footer />
