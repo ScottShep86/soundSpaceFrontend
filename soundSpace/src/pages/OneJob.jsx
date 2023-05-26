@@ -110,7 +110,7 @@ function OneJob() {
                 <p>{message.comment}</p>
                 <p>
                   {`${message.created.slice(0, 10)} at ${message.created.slice(
-                    12,
+                    11,
                     16
                   )}`}
                 </p>
