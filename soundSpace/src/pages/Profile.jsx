@@ -78,7 +78,7 @@ function Profile() {
 
   const handleDelete = async (jobId) => {
     try {
-      if (token) return;
+      if (!token) return;
       await verifyToken(token);
       const response = await axios.delete(
         `${import.meta.env.VITE_BASE_API_URL}/profile/${jobId}/jobs`,
